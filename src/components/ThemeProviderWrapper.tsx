@@ -1,7 +1,7 @@
 // src/components/ThemeProviderWrapper.tsx
 "use client";
 
-import { useDarkMode } from "@/hooks/useDarkMode";
+import { ThemeContextProvider, useThemeContext } from "@/context/ThemeContext";
 import { GlobalStyle } from "@/styles/GlobalStyle";
 import { darkTheme, lightTheme } from "@/styles/theme";
 import { ReactNode, useMemo } from "react";
@@ -11,10 +11,8 @@ interface ThemeProviderWrapperProps {
   children: ReactNode;
 }
 
-const ThemeProviderWrapper = ({ children }: ThemeProviderWrapperProps) => {
-  const [theme, toggleTheme] = useDarkMode();
-
-  // 현재 테마에 맞춰 적절한 theme 객체 선택
+const ThemeWrapper = ({ children }: { children: ReactNode }) => {
+  const { theme } = useThemeContext();
   const selectedTheme = useMemo(() => (theme === "light" ? lightTheme : darkTheme), [theme]);
 
   return (
@@ -22,6 +20,14 @@ const ThemeProviderWrapper = ({ children }: ThemeProviderWrapperProps) => {
       <GlobalStyle />
       {children}
     </ThemeProvider>
+  );
+};
+
+const ThemeProviderWrapper = ({ children }: ThemeProviderWrapperProps) => {
+  return (
+    <ThemeContextProvider>
+      <ThemeWrapper>{children}</ThemeWrapper>
+    </ThemeContextProvider>
   );
 };
 

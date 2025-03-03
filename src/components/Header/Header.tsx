@@ -1,13 +1,13 @@
 // src/components/Header/Header.tsx
 "use client";
 
-import { useDarkMode } from "@/hooks/useDarkMode";
+import { useThemeContext } from "@/context/ThemeContext";
 import { FiMoon, FiSun } from "react-icons/fi";
 import Button from "../Button/Button";
 import * as S from "./Header.styled";
 
 const Header = () => {
-  const [theme, toggleTheme] = useDarkMode();
+  const { theme, toggleTheme } = useThemeContext();
 
   return (
     <S.Container>

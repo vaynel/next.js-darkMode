@@ -5,7 +5,10 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) =>{
+    console.log("음 바뀌나? : "+theme.background)
+    return theme.background
+  } };
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 `;
 
